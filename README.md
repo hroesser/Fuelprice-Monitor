@@ -1,5 +1,8 @@
 # Fuelprice-Monitor
-Small HTML5 App to display fuelprices from stations in the physical environment. Supports the geolocation of user's device. Based on the price database "Tankerkönig" https://creativecommons.tankerkoenig.de/
+
+![screenshot](screenshots/mobile-device.jpg "screenshot")
+
+Small HTML5 App to display actual fuelprices from stations in the physical environment. Supports the geolocation of user's device. Fetches the free price database "Tankerkönig" https://creativecommons.tankerkoenig.de/
 
 * HTML5
 * jQuery
