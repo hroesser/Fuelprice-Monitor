@@ -43,8 +43,7 @@
 	   	    </div>
    	    </div>
 
-		<div id="stations"><button id="fetch">Lade Tankstellen</button></div>
-
+		<div id=""><button id="fetch">Lade Tankstellen</button></div>
    	    <!-- ajax will load Handlebars-compiled html with all stations here -->
    	    <div id="stations"></div>
  		<div id="powered">
@@ -57,6 +56,7 @@
 	<script type="text/javascript" >
 
 		var dataUrl = "https://creativecommons.tankerkoenig.de/json/list.php";
+		var API_key = "xxxxx-xxxxx-xxxxx-xxxxx" ; // your API-Key here
 
 		drawStations = function(response) {
 			'use strict';
@@ -64,6 +64,8 @@
 			// handlebars..
 			var source = $("#station-template").html();
 			var template = Handlebars.compile(source);
+			var price;
+			$("#stations").html("");
 
 			$.each(response.stations, function(index, station) {
 				price = JSON.stringify(station.price);
@@ -91,19 +93,23 @@
 			'use strict';
 			$.ajax({
 			    url: dataUrl,
+			    cache: false,
+			    type: "POST",
+		    	beforeSend: function()	{
+					$("#stations").html("Loading..");
+				},
 			    data: {
-					lat: position.coords.latitude,	  
-					lng: position.coords.longitude,  	
+					lat:position.coords.latitude,	  
+					lng:position.coords.longitude,  	
 					rad:5,
 					sort:"price",
 					type:"diesel",
-					apikey:"xxxx-xxxx-xxxx-xxxx-xxxx"  // your API Key here
+					apikey:API_key // your API Key here
 			    },
-			    success: function( response ) {
+			    success: function(response) {
 			        if (!response.ok) {
 			            console.error(response.message);
-			            $('#stations').append("<span class='error'>Fehler: "+response.message +"</span>");
-
+			            alert("Fehler :"+response.message);
 			        } else {
 			            drawStations(response);
 			        }
@@ -124,8 +130,9 @@
 
 		$(document).ready(function() {
 			'use strict';
+			//$('#spinner').hide(),
 			$('#clock').simpleClock();
-			$('#fetch').click( function(){
+			$('#fetch').click( function()	{
 				navigator.geolocation.getCurrentPosition(geolocationAction, errorsAction);
 			});
 		});

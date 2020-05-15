@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 		jshint: {
 		  files: [
 		  	'gruntfile.js', 
-		  	'js/simpleClock.js' ]
+		  	'js/simpleClock.js'
+			]
 		},
 
 		uglify: {
