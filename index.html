@@ -94,7 +94,7 @@
 			$.ajax({
 			    url: dataUrl,
 			    cache: false,
-			    type: "POST",
+			    type: "GET",
 		    	beforeSend: function()	{
 					$("#stations").html("Loading..");
 				},
@@ -115,7 +115,7 @@
 			        }
 			    }
 			});
-		}
+		};
 
         errorsAction = function(error) {
         	'use strict';
